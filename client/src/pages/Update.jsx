@@ -1,41 +1,24 @@
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-// import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useState } from "react"
+import { useLocation, useNavigate } from "react-router-dom"
+import { useUpdateMember } from "../hooks/useUpdateMember"
 
 const Update = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+
     const [member, setMember] = useState({
+        id: parseInt(location.pathname.split("/").pop()),
         name: "",
         position: "",
         experience: "",
-        wage: null,
-    });
+        wage: 0,
+    })
+    const handleChange = ({ target }) => setMember({ ...member, [target.name]: target.value })
 
-    const navigate  = useNavigate();
-    const location = useLocation();
-
-    const memberId = location.pathname.split("/")[2];
-
-    console.log(location.pathname.split("/")[2])
-
-    const handleChange = (e) =>  {
-        setMember(prev=>({...prev, [e.target.name]: e.target.value }));
-    };
-
-    const handleClick = async e => {
-      e.preventDefault();
-
-      try {
-        await axios.put("http://localhost:8800/members/"+ memberId, member);
-        navigate("/");
-    } catch(err) {
-        console.log(err);
-      }
-
-    }
-
-    console.log(member);
+    const { mutate } = useUpdateMember({
+        onSuccess: () => navigate('/')
+    })
+    const handleClick = () => mutate(member)
 
     return (
         <div className="form">
@@ -46,7 +29,7 @@ const Update = () => {
             <input type="number" placeholder="wage" onChange={handleChange} name="wage"/>
             <button className="formButton" onClick={handleClick}>Update</button>
         </div>
-    );
-};
+    )
+}
 
-export default Update;
+export default Update
