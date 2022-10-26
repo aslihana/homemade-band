@@ -2,6 +2,7 @@ import React from "react"
 import { Link } from "react-router-dom"
 import { useMembers } from "../hooks/useMemebers"
 import { useDeleteMember } from "../hooks/useDeleteMember"
+import "./Members.style.css"
 
 const Members = () => {
     const { data: members } = useMembers()
@@ -25,10 +26,9 @@ const Members = () => {
                 }
             </div>
            
-          <button className="addNew">
-            <Link to="/add">Add new member</Link>
-          </button>
-          
+            <button className="add-new">
+                <Link to="/add">Add new member</Link>
+            </button>
         </div>
     )
 }
