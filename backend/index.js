@@ -1,25 +1,26 @@
-import express from "express";
-import mysql from "mysql2/promise";
-import cors from  "cors";
-import makeMemebersDatabase from "./members.database.js";
+import express from "express"
+import mysql from "mysql2/promise"
+import cors from  "cors"
+import makeMemebersDatabase from "./members.database.js"
 
 (async () => {
-    const app = express();
-
     const db = await mysql.createConnection({
         host:"localhost",
         user:"root",
         password:"",
         database:"bandMembers"
     });
-    const members = makeMemebersDatabase({ database: db })
+    await db.connect()
 
-    app.use(express.json());
-    app.use(cors());
+    const members = makeMemebersDatabase({ database: db })
+    const app = express()
+
+    app.use(express.json())
+    app.use(cors())
 
 
     app.get("/", (req, res) => {
-        res.json("hello this is the backend");
+        res.json("hello this is the backend")
     })
 
     app.get("/members", async (req, res) => {
@@ -38,7 +39,7 @@ import makeMemebersDatabase from "./members.database.js";
         } else {
             res.sendStatus(500)
         }
-    });
+    })
 
     app.put("/members/:id", async (req, res) => {
         const member = await members.update(req.params.id, req.body)
@@ -47,7 +48,7 @@ import makeMemebersDatabase from "./members.database.js";
         } else {
             res.sendStatus(500)
         }
-    });
+    })
 
     app.delete("/members/:id", async (req, res) => {
         const member = await members.remove(req.params.id)
@@ -56,9 +57,9 @@ import makeMemebersDatabase from "./members.database.js";
         } else {
             res.sendStatus(500)
         }
-    });
+    })
 
     app.listen(process.env.PORT || 8800, () => {
-        console.log("Connected to backend!");
+        console.log("Connected to backend!")
     })
 })()
