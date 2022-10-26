@@ -49,7 +49,7 @@ app.post("/members", (req, res) => {
     });
 });
 
-app.delete("/:id", (req, res) => {
+app.delete("/members/:id", (req, res) => {
     const memberId = req.params.id;
     const q = "DELETE FROM members WHERE id = ?";
 
@@ -59,7 +59,7 @@ app.delete("/:id", (req, res) => {
     });
 });
 
-app.put("/:id", (req, res) => {
+app.put("/members/:id", (req, res) => {
     const memberId = req.params.id;
     const q = "UPDATE members SET `position` = ?, `experience` = ?, `wage` = ?, `name` = ? WHERE id = ?";
 

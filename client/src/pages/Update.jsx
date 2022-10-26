@@ -27,7 +27,7 @@ const Update = () => {
       e.preventDefault();
 
       try {
-        await axios.put("http://localhost:8800/"+ memberId, member);
+        await axios.put("http://localhost:8800/members/"+ memberId, member);
         navigate("/");
     } catch(err) {
         console.log(err);

@@ -22,7 +22,7 @@ const Members = () => {
 
     const handleDelete = async (id) => {
         try{
-            await axios.delete("http://localhost:8800/"+id);
+            await axios.delete("http://localhost:8800/members/"+id);
             window.location.reload()
         } catch(err){
             console.log(err);
