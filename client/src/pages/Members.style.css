@@ -1,0 +1,40 @@
+.members {
+    display: flex;
+    gap: 1-px;
+}
+
+.member {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.delete {
+    border: none;
+    padding: 3px 6px;
+    background-color: white;
+    cursor: pointer;
+    color: rgb(124, 81, 7);
+}
+
+.update {
+    border: none;
+    padding: 3px 6px;
+    background-color: white;
+    cursor: pointer;
+    color: rgb(224, 150, 22);
+}
+
+.add-new {
+    border: none;
+    padding: 3px 6px;
+    background-color: rgba(143, 24, 24, 0.946);
+    cursor: pointer;
+}
+
+.add-new > a {
+    /* Previous color was: rgb(67, 55, 34) - it's really ugly imho so I'm going with white lol */
+    color: white !important;
+}
